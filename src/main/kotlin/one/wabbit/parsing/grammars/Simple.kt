@@ -152,6 +152,7 @@ fun interface Simple<Set : Any, S : Any, out A> {
 
                         Simple { s ->
                             val result = p0.parse(s as SimpleInput<Char>) as SimpleResult<Set, Sym, Any?>
+
                             when (result) {
                                 is SimpleResult.Success -> {
                                     val length = result.newInput.position - s.position

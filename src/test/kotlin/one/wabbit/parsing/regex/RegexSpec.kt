@@ -52,7 +52,7 @@ class RegexSpec {
 
     fun genPositive(size: Int, r: Regex<CharSet>): Gen<Cord> {
         return when (r) {
-            Regex.Eps -> Gen.pure(Cord.empty)
+            Regex.Eps -> Gen.const(Cord.empty)
             is Regex.OneOf -> {
                 val cs = r.symbols
                 Gen.int(0 ..< cs.size).map { cs[it] }.map { Cord.of(it) }
@@ -66,7 +66,7 @@ class RegexSpec {
                 if (size > 0) Gen.int(0 ..< size)
                     .flatMap { Gen.repeat(it, r0) }
                     .map { it.fold(Cord.empty) { a, b -> a + b } }
-                else Gen.pure(Cord.empty)
+                else Gen.const(Cord.empty)
             }
             Regex.Empty -> Gen.Fail
             Regex.All -> Gen.int(0 ..< size).flatMap {
