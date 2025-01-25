@@ -28,13 +28,13 @@ publishing {
 }
 
 dependencies {
-    implementation("com.github.wabbit-corp:kotlin-data:1.1.0")
+    implementation("com.github.wabbit-corp:kotlin-data:1.2.0")
     implementation("com.github.wabbit-corp:kotlin-data-need:1.2.0")
     implementation("com.github.wabbit-corp:kotlin-data-ref:1.1.1")
-    implementation("com.github.wabbit-corp:kotlin-parsing-charset:1.0.1")
+    implementation("com.github.wabbit-corp:kotlin-parsing-charset:1.1.0")
     implementation("com.github.wabbit-corp:kotlin-parsing-charinput:1.1.0")
     implementation("com.github.wabbit-corp:kotlin-java-escape:1.0.1")
-    testImplementation("com.github.wabbit-corp:kotlin-random-gen:1.1.0")
+    testImplementation("com.github.wabbit-corp:kotlin-random-gen:1.2.0")
 
     testImplementation(kotlin("test"))
 
