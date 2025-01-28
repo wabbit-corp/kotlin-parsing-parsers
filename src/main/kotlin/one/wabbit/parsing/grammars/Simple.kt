@@ -296,65 +296,6 @@ fun interface Simple<Set : Any, S : Any, out A> {
                     }
                 }
 
-                is Parser.AndNot<Set, Sym, *> -> {
-                    val p0 = compile(p.parser)
-                    val p1 = compile(p.not)
-
-                    Simple { s ->
-                        val r0 = p0.parse(s)
-                        when (r0) {
-                            is SimpleResult.Success -> {
-                                val r1 = p1.parse(s)
-                                when (r1) {
-                                    is SimpleResult.Success ->
-                                        SimpleResult.Failure(
-                                            Path.Error("unexpected ${r0.value}"),
-                                            s,
-                                            null)
-
-                                    is SimpleResult.Failure ->
-                                        SimpleResult.Success(r0.value as Result, r0.newInput)
-                                }
-                            }
-
-                            is SimpleResult.Failure ->
-                                SimpleResult.Failure(
-                                    r0.failurePath,
-                                    r0.failedAt,
-                                    r0.expectedChars)
-                        }
-                    }
-                }
-                is Parser.AndNotFollowedBy -> {
-                    val p0 = compile(p.parser)
-                    val p1 = compile(p.not)
-
-                    Simple { s ->
-                        val r0 = p0.parse(s)
-                        when (r0) {
-                            is SimpleResult.Success -> {
-                                val r1 = p1.parse(r0.newInput)
-                                when (r1) {
-                                    is SimpleResult.Success ->
-                                        SimpleResult.Failure(
-                                            Path.Error("unexpected ${r0.value}"),
-                                            s,
-                                            null)
-
-                                    is SimpleResult.Failure ->
-                                        SimpleResult.Success(r0.value as Result, r0.newInput)
-                                }
-                            }
-
-                            is SimpleResult.Failure ->
-                                SimpleResult.Failure(
-                                    r0.failurePath,
-                                    r0.failedAt,
-                                    r0.expectedChars)
-                        }
-                    }
-                }
-
                 is Parser.Sequence<Set, Sym, *, *> -> {
                     val p1 = compile(p.left)
                     val p2 = compile(p.right)

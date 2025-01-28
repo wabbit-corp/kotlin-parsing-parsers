@@ -32,9 +32,6 @@ sealed class Parser<Set, Sym, out A> {
     data class Delay<Set, Sym, A>(val thunk: Need<Parser<Set, Sym, A>>) : Parser<Set, Sym, A>()
     data class FlatMap<Set, Sym, A, B>(val parser: Parser<Set, Sym, A>, val f: (A) -> Parser<Set, Sym, B>) : Parser<Set, Sym, B>()
 
-    data class AndNot<Set, Sym, A>(val parser: Parser<Set, Sym, A>, val not: Parser<Set, Sym, Any?>) : Parser<Set, Sym, A>()
-    data class AndNotFollowedBy<Set, Sym, A>(val parser: Parser<Set, Sym, A>, val not: Parser<Set, Sym, Any?>) : Parser<Set, Sym, A>()
-
     fun <B> map(f: (A) -> B): Parser<Set, Sym, B> = Map(this, f)
     fun filter(predicate: (A) -> String?): Parser<Set, Sym, A> = Filter(this, predicate)
     fun <B> flatMap(f: (A) -> Parser<Set, Sym, B>): Parser<Set, Sym, B> = FlatMap(this, f)
@@ -160,7 +157,6 @@ sealed class Parser<Set, Sym, out A> {
         operator fun <A> CharRange.plus(that: Parser<CharSet, Char, A>): Parser<CharSet, Char, A> = terminal(CharSet.of(this)).ignore + that
         val CharRange.p: Parser<CharSet, Char, Unit> get() = CharSet.of(this).ignore
 
-        operator fun String.not(): Parser<CharSet, Char, Char> = AndNot(terminal(CharSet.all), string(this))
         val String.ignore: Parser<CharSet, Char, Unit> get() = string(this).ignore
         fun <A> String.ignore(value: () -> A): Parser<CharSet, Char, A> = string(this).ignore(value)
         val String.many: Parser<CharSet, Char, List<String>> get() = string(this).many

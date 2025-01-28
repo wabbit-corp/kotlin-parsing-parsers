@@ -160,8 +160,6 @@ fun <SS, S, A> Parser<SS, S, A>.toGraph(): Graph<SS, S, Ref<Parser<SS, S, *>>> {
 
             is Parser.Error -> TODO()
             is Parser.Filter -> TODO()
-            is Parser.AndNot -> TODO()
-            is Parser.AndNotFollowedBy -> TODO()
         }
 
         require(nodes[next]!!.children.all { it != null }) {
