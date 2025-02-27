@@ -1,6 +1,6 @@
 package one.wabbit.parsing.grammars
 
-import one.wabbit.data.CharBuf
+import one.wabbit.data.CharBuffer
 import one.wabbit.formatting.escapeJavaString
 import one.wabbit.parsing.charset.CharSet
 import one.wabbit.parsing.charset.SetLike1
@@ -101,7 +101,7 @@ sealed interface SimpleResult<Set: Any, S : Any, out A> {
 fun interface Simple<Set : Any, S : Any, out A> {
     class Result(
         var value: Any?,
-        var chars: CharBuf
+        var chars: CharBuffer
     )
 
     fun parse(input: SimpleInput<S>): SimpleResult<Set, S, A>
