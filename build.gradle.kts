@@ -11,7 +11,7 @@ group   = "one.wabbit"
 version = "2.0.0"
 
 plugins {
-    kotlin("jvm") version "2.0.20"
+    kotlin("jvm") version "2.1.20"
 
     id("maven-publish")
 }
@@ -32,7 +32,7 @@ dependencies {
     implementation("com.github.wabbit-corp:kotlin-data-need:1.2.0")
     implementation("com.github.wabbit-corp:kotlin-data-ref:1.1.1")
     implementation("com.github.wabbit-corp:kotlin-parsing-charset:1.2.0")
-    implementation("com.github.wabbit-corp:kotlin-parsing-charinput:1.1.0")
+    implementation("com.github.wabbit-corp:kotlin-parsing-charinput:1.2.0")
     implementation("com.github.wabbit-corp:kotlin-java-escape:1.0.1")
     testImplementation("com.github.wabbit-corp:kotlin-random-gen:1.3.0")
 
